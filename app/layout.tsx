@@ -14,11 +14,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "AF Tours & Travels | Kadapa",
+    default: "AF Tours & Travels | Trusted Travel Partner in Kadapa",
     template: "%s | AF Tours & Travels",
   },
   description:
-    "AF Tours & Travels is a trusted travel partner in Kadapa, India. Flight booking, visa assistance, Umrah packages, hotel booking, and travel insurance.",
+    "AF Tours & Travels in Kadapa provides UAE Tourist Visa, Kuwait Visa Stamping, GAMCA Medical Appointment, Flight Booking and complete travel support.",
   applicationName: "AF Tours & Travels",
   keywords: [
     "AF Tours & Travels",
@@ -34,19 +34,22 @@ export const metadata: Metadata = {
   creator: "AF Tours & Travels",
   category: "Travel",
   robots: { index: true, follow: true },
+  verification: {
+    google: "lwBvWFGnyG3JsZ4Nqaa7Xefl9oPzB_FUns-nTK_yPLI",
+  },
   openGraph: {
-    title: "AF Tours & Travels | Kadapa",
+    title: "AF Tours & Travels | Trusted Travel Partner in Kadapa",
     description:
-      "Trusted travel partner in Kadapa for flights, visa assistance, Umrah packages, hotels, and travel insurance.",
+      "AF Tours & Travels in Kadapa provides UAE Tourist Visa, Kuwait Visa Stamping, GAMCA Medical Appointment, Flight Booking and complete travel support.",
     type: "website",
     locale: "en_IN",
     siteName: "AF Tours & Travels",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AF Tours & Travels | Kadapa",
+    title: "AF Tours & Travels | Trusted Travel Partner in Kadapa",
     description:
-      "Trusted travel partner in Kadapa for flights, visa assistance, Umrah packages, hotels, and travel insurance.",
+      "AF Tours & Travels in Kadapa provides UAE Tourist Visa, Kuwait Visa Stamping, GAMCA Medical Appointment, Flight Booking and complete travel support.",
   },
 };
 
