@@ -427,14 +427,6 @@ export function ReviewsSection() {
           ))}
         </div>
 
-        <div className="mt-10 flex justify-center">
-          <a
-            href="#"
-            className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#d4af37] to-[#b88b1f] px-6 py-3 text-sm font-semibold text-[#0b1f3a] shadow-[0_16px_40px_-18px_rgba(212,175,55,0.85)] transition hover:brightness-110"
-          >
-            View More Reviews on Google
-          </a>
-        </div>
       </div>
     </section>
   );
