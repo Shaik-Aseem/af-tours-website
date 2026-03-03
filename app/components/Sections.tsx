@@ -1,4 +1,5 @@
 import Image from "next/image";
+import RevealSection from "./RevealSection";
 import { LINKS, SITE } from "./site-data";
 import {
   IconArrowRight,
@@ -55,7 +56,8 @@ export function HeroSection() {
 
       <div className="relative">
         <div className="container flex min-h-[80vh] flex-col items-center justify-center py-24 sm:min-h-screen sm:py-32">
-          <div className="max-w-3xl text-center animate-fade-in-up">
+          <RevealSection className="w-full">
+            <div className="mx-auto max-w-3xl text-center animate-fade-in-up">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-4 py-1.5 text-xs font-semibold tracking-[0.2em] text-white/70 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
               PREMIUM TRAVEL SERVICES
@@ -106,7 +108,8 @@ export function HeroSection() {
                 24/7 WhatsApp Support
               </p>
             </div>
-          </div>
+            </div>
+          </RevealSection>
         </div>
       </div>
     </section>
@@ -139,7 +142,8 @@ export function ServicesSection() {
 
   return (
     <section id="services" className="scroll-mt-24 py-20">
-      <div className="container">
+      <RevealSection>
+        <div className="container">
         <SectionHeading
           eyebrow="SERVICES"
           title="Everything you need for a smooth journey"
@@ -174,7 +178,7 @@ export function ServicesSection() {
             </div>
           ))}
         </div>
-      </div>
+      </RevealSection>
     </section>
   );
 }
@@ -200,7 +204,8 @@ export function PopularVisaSection() {
 
   return (
     <section className="py-16">
-      <div className="mx-auto max-w-7xl px-6">
+      <RevealSection>
+        <div className="mx-auto max-w-7xl px-6">
         <div className="mb-10 text-center">
           <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Popular Visa & Travel Services
@@ -247,7 +252,7 @@ export function PopularVisaSection() {
             </article>
           ))}
         </div>
-      </div>
+      </RevealSection>
     </section>
   );
 }
@@ -283,7 +288,8 @@ export function GallerySection() {
 
   return (
     <section id="gallery" className="scroll-mt-24 py-16">
-      <div className="mx-auto max-w-7xl px-6">
+      <RevealSection>
+        <div className="mx-auto max-w-7xl px-6">
         <div className="mb-10 text-center">
           <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Explore Popular Destinations
@@ -322,7 +328,7 @@ export function GallerySection() {
             </article>
           ))}
         </div>
-      </div>
+      </RevealSection>
     </section>
   );
 }
@@ -349,7 +355,8 @@ export function ReviewsSection() {
 
   return (
     <section id="reviews" className="scroll-mt-24">
-      <div className="mx-auto max-w-7xl px-6 py-16">
+      <RevealSection>
+        <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="mb-10 text-center">
           <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             What Our Customers Say
@@ -375,8 +382,8 @@ export function ReviewsSection() {
             </article>
           ))}
         </div>
-
-      </div>
+        </div>
+      </RevealSection>
     </section>
   );
 }
@@ -384,7 +391,8 @@ export function ReviewsSection() {
 export function ContactSection() {
   return (
     <section id="contact" className="scroll-mt-24 py-20">
-      <div className="container">
+      <RevealSection>
+        <div className="container">
         <SectionHeading
           eyebrow="CONTACT"
           title="Let’s plan your next trip"
@@ -489,7 +497,7 @@ export function ContactSection() {
             </div>
           </div>
         </div>
-      </div>
+      </RevealSection>
     </section>
   );
 }
