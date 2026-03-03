@@ -5,6 +5,7 @@ import {
   Footer,
   GallerySection,
   HeroSection,
+  PopularVisaSection,
   ReviewsSection,
   ServicesSection,
 } from "./components/Sections";
@@ -18,6 +19,7 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <ServicesSection />
+        <PopularVisaSection />
         <GallerySection />
         <ReviewsSection />
         <ContactSection />
