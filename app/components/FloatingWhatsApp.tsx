@@ -1,3 +1,5 @@
+"use client";
+
 import { LINKS } from "./site-data";
 import { IconWhatsApp } from "./Icons";
 

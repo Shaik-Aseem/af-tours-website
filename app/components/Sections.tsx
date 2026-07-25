@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import RevealSection from "./RevealSection";
 import { LINKS, SITE } from "./site-data";

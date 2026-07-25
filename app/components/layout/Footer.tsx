@@ -1,3 +1,5 @@
+"use client";
+
 import { LINKS, SITE, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
 import { IconFacebook, IconInstagram, IconPhone, IconWhatsApp } from "../Icons";
 
