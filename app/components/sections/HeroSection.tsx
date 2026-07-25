@@ -53,30 +53,33 @@ export default function HeroSection() {
       >
         {/* Animated Cinematic Zoom Video */}
         <motion.div
-          animate={{ scale: [1, 1.15, 1] }}
-          transition={{ repeat: Infinity, duration: 25, ease: "easeInOut" }}
+          animate={{ scale: [1.0, 1.05, 1.0] }}
+          transition={{ repeat: Infinity, duration: 30, ease: "easeInOut" }}
           className="absolute inset-0 h-full w-full"
         >
           <video
             ref={videoRef}
-            src="/stars.mp4"
+            src="/stars1.mp4"
             autoPlay
             muted
             loop
             playsInline
             preload="auto"
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ filter: "brightness(1.1) contrast(1.1)" }}
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            style={{ 
+              filter: "brightness(1.35) contrast(1.2) saturate(1.35)",
+              willChange: "transform"
+            }}
           >
-            <source src="/stars.mp4" type="video/mp4" />
+            <source src="/stars1.mp4" type="video/mp4" />
           </video>
         </motion.div>
         
-        {/* Premium Gradient Overlay (~45% darkness near top/center, blending into dark base) (z-index: 10) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/45 via-[#050505]/35 to-[#050505]/90 z-10" />
+        {/* Subtle Gradient Overlay for High Star Visibility & Clear Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/20 via-[#050505]/15 to-[#050505]/80 z-10" />
         
-        {/* Faint radial light behind center of hero (z-index: 10) */}
-        <div className="absolute left-1/2 top-1/2 h-[700px] w-[700px] sm:h-[900px] sm:w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.12)_0%,rgba(30,58,138,0.08)_45%,transparent_75%)] blur-3xl z-10 pointer-events-none" />
+        {/* Subtle deep blue radial glow for background depth (z-index: 10) */}
+        <div className="absolute left-1/2 top-1/2 h-[750px] w-[750px] sm:h-[950px] sm:w-[950px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(30,58,138,0.18)_0%,rgba(15,23,42,0.12)_50%,transparent_75%)] blur-3xl z-10 pointer-events-none" />
       </motion.div>
 
       {/* Hero Content (z-index: 20) */}
@@ -87,8 +90,8 @@ export default function HeroSection() {
           animate="visible"
           className="mx-auto max-w-4xl relative"
         >
-          {/* Subtle gold glow behind main heading */}
-          <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 w-[450px] sm:w-[650px] h-[220px] bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.2)_0%,transparent_70%)] blur-3xl pointer-events-none -z-10" />
+          {/* Soft golden radial glow behind main headline */}
+          <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 w-[450px] sm:w-[650px] h-[220px] bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.22)_0%,rgba(212,175,55,0.05)_55%,transparent_75%)] blur-3xl pointer-events-none -z-10" />
 
           {/* Trust Badge */}
           <motion.div variants={itemVariants} className="mb-5 sm:mb-6 flex justify-center">

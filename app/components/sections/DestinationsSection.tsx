@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getServiceWhatsAppLink } from "../../lib/site-data";
+import { IconWhatsApp } from "../Icons";
 
 const DESTINATIONS = [
   {
@@ -219,13 +221,33 @@ export default function DestinationsSection() {
                 />
                 
                 {/* Image Details Banner */}
-                <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                  <h3 className="text-2xl font-medium tracking-tight text-white mb-1">
-                    {DESTINATIONS[lightboxIndex].title}
-                  </h3>
-                  <p className="text-sm font-medium tracking-widest text-[#d4af37] uppercase">
-                    {DESTINATIONS[lightboxIndex].subtitle}
-                  </p>
+                <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-2xl font-medium tracking-tight text-white mb-1">
+                      {DESTINATIONS[lightboxIndex].title}
+                    </h3>
+                    <p className="text-sm font-medium tracking-widest text-[#d4af37] uppercase">
+                      {DESTINATIONS[lightboxIndex].subtitle} • {DESTINATIONS[lightboxIndex].tag}
+                    </p>
+                  </div>
+                  <a
+                    href={getServiceWhatsAppLink(
+                      DESTINATIONS[lightboxIndex].tag.includes("Visa")
+                        ? "UAE Tourist Visa"
+                        : DESTINATIONS[lightboxIndex].tag.includes("Umrah")
+                        ? "Umrah Packages"
+                        : DESTINATIONS[lightboxIndex].tag.includes("Stamping")
+                        ? "Kuwait Visa Stamping"
+                        : "International Tour Packages"
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 text-xs font-bold tracking-widest text-[#050505] shadow-[0_0_15px_rgba(37,211,102,0.3)] transition-all hover:bg-[#34e678] uppercase shrink-0"
+                  >
+                    <IconWhatsApp className="w-4 h-4" />
+                    <span className="hidden sm:inline">Inquire on WhatsApp</span>
+                    <span className="sm:hidden">Inquire</span>
+                  </a>
                 </div>
               </div>
             </motion.div>

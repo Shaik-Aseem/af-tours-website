@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LINKS } from "../../lib/site-data";
+import { LINKS, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
 import { 
   IconArrowRight, 
   IconPlane, 
@@ -19,6 +19,7 @@ type ServiceDetail = {
   title: string;
   desc: string;
   icon: React.ReactNode;
+  message: string;
   benefits: string[];
   processingTime?: string;
   documents?: string[];
@@ -29,6 +30,7 @@ const SERVICES: ServiceDetail[] = [
     title: "UAE Tourist Visa",
     desc: "Step-by-step support for documentation and fast appointment readiness.",
     icon: <IconVisa className="w-6 h-6" />,
+    message: serviceMessages.uaeVisa,
     processingTime: "2-4 Working Days",
     benefits: [
       "99% Approval Rate",
@@ -46,6 +48,7 @@ const SERVICES: ServiceDetail[] = [
     title: "Flight Booking",
     desc: "Domestic & international tickets with smart routing and fair pricing.",
     icon: <IconPlane className="w-6 h-6" />,
+    message: serviceMessages.flightBooking,
     benefits: [
       "Best price guarantee on international routes",
       "Multi-city complex itinerary planning",
@@ -57,6 +60,7 @@ const SERVICES: ServiceDetail[] = [
     title: "Umrah Packages",
     desc: "Comfort-focused pilgrimage plans with reliable coordination.",
     icon: <IconMosque className="w-6 h-6" />,
+    message: serviceMessages.umrah,
     processingTime: "5-7 Working Days",
     benefits: [
       "Premium hotels near Haram",
@@ -71,9 +75,58 @@ const SERVICES: ServiceDetail[] = [
     ]
   },
   {
+    title: "International Tour Packages",
+    desc: "Tailored global holiday packages with flights, hotels, and guided sightseeing.",
+    icon: <IconPlane className="w-6 h-6" />,
+    message: serviceMessages.internationalTours,
+    benefits: [
+      "Customized itineraries for popular global destinations",
+      "End-to-end travel, accommodation & visa management",
+      "Guided local tours and airport transfers",
+      "Best group & family travel rates"
+    ]
+  },
+  {
+    title: "Domestic Tour Packages",
+    desc: "Explore top Indian destinations with curated tour itineraries.",
+    icon: <IconBuilding className="w-6 h-6" />,
+    message: serviceMessages.domesticTours,
+    benefits: [
+      "Pan-India holiday packages",
+      "Family, honeymoon & pilgrimage specials",
+      "Verified stays and seamless transport",
+      "Dedicated trip coordinator"
+    ]
+  },
+  {
+    title: "Hotel Booking",
+    desc: "Verified premium stays with great value and flexible options.",
+    icon: <IconBuilding className="w-6 h-6" />,
+    message: serviceMessages.hotelBooking,
+    benefits: [
+      "Exclusive negotiated rates",
+      "Global hotel network",
+      "Flexible cancellation policies",
+      "Special requests handling (Anniversary, Honeymoon)"
+    ]
+  },
+  {
+    title: "Travel Assistance",
+    desc: "Complete personal guidance for smooth international and domestic travel.",
+    icon: <IconShield className="w-6 h-6" />,
+    message: serviceMessages.travelAssistance,
+    benefits: [
+      "End-to-end travel coordination",
+      "Documentation & attestation support",
+      "Custom travel itinerary planning",
+      "24/7 dedicated WhatsApp support"
+    ]
+  },
+  {
     title: "Kuwait Visa Stamping",
     desc: "Hassle-free assistance for GAMCA medical and embassy submissions.",
     icon: <IconPassport className="w-6 h-6" />,
+    message: serviceMessages.kuwaitVisa,
     processingTime: "7-10 Working Days",
     benefits: [
       "GAMCA Medical appointment booking",
@@ -92,22 +145,12 @@ const SERVICES: ServiceDetail[] = [
     title: "Travel Insurance",
     desc: "Comprehensive coverage options tailored to your destination.",
     icon: <IconShield className="w-6 h-6" />,
+    message: serviceMessages.travelInsurance,
     benefits: [
       "Medical emergency coverage",
       "Trip cancellation protection",
       "Lost baggage compensation",
       "Schengen-approved policies available"
-    ]
-  },
-  {
-    title: "Hotel Booking",
-    desc: "Verified premium stays with great value and flexible options.",
-    icon: <IconBuilding className="w-6 h-6" />,
-    benefits: [
-      "Exclusive negotiated rates",
-      "Global hotel network",
-      "Flexible cancellation policies",
-      "Special requests handling (Anniversary, Honeymoon)"
     ]
   },
 ];
@@ -190,10 +233,21 @@ export default function ServicesSection() {
                   {service.desc}
                 </p>
                 
-                <button className="flex items-center gap-2 text-xs font-semibold tracking-wider text-white transition-colors duration-300 group-hover:text-[#d4af37] uppercase mt-auto focus:outline-none">
-                  <span>Learn More</span>
-                  <IconArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-2" />
-                </button>
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                  <a
+                    href={getWhatsAppUrl(service.message)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openWhatsApp(service.message);
+                    }}
+                    className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-white transition-colors duration-300 hover:text-[#25D366] uppercase focus:outline-none cursor-pointer"
+                  >
+                    <span>Learn More</span>
+                    <IconArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -280,10 +334,14 @@ export default function ServicesSection() {
 
                 <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-4">
                   <a
-                    href={LINKS.whatsapp}
+                    href={getWhatsAppUrl(selectedService.message)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 group relative flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-[#25D366] px-8 py-4 text-[11px] font-bold tracking-widest text-[#050505] shadow-[0_0_20px_rgba(37,211,102,0.2)] transition-all duration-300 hover:bg-[#34e678] hover:shadow-[0_0_30px_rgba(37,211,102,0.4)] uppercase"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      openWhatsApp(selectedService.message);
+                    }}
+                    className="flex-1 group relative flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-[#25D366] px-8 py-4 text-[11px] font-bold tracking-widest text-[#050505] shadow-[0_0_20px_rgba(37,211,102,0.2)] transition-all duration-300 hover:bg-[#34e678] hover:shadow-[0_0_30px_rgba(37,211,102,0.4)] uppercase cursor-pointer"
                   >
                     <IconWhatsApp className="w-4 h-4" />
                     <span>WhatsApp Us</span>

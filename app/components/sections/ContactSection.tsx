@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { LINKS, SITE } from "../../lib/site-data";
+import { LINKS, SITE, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
 import { IconFacebook, IconInstagram, IconMapPin, IconPhone, IconWhatsApp } from "../Icons";
 
 export default function ContactSection() {
@@ -87,10 +87,14 @@ export default function ContactSection() {
 
             <div className="flex flex-col gap-4">
               <a
-                href={LINKS.whatsapp}
+                href={getWhatsAppUrl(serviceMessages.general)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-4 p-5 rounded-2xl glass-card transition-all duration-500 hover:-translate-y-1 hover:bg-white/[0.03] hover:border-[#25D366]/30 hover:shadow-[0_15px_30px_rgba(37,211,102,0.1)]"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openWhatsApp(serviceMessages.general);
+                }}
+                className="group flex items-center gap-4 p-5 rounded-2xl glass-card transition-all duration-500 hover:-translate-y-1 hover:bg-white/[0.03] hover:border-[#25D366]/30 hover:shadow-[0_15px_30px_rgba(37,211,102,0.1)] cursor-pointer"
               >
                 <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#25D366]/10 text-[#25D366] ring-1 ring-[#25D366]/30 transition-transform duration-500 group-hover:scale-110 group-hover:bg-[#25D366] group-hover:text-black">
                   <IconWhatsApp className="w-5 h-5" />

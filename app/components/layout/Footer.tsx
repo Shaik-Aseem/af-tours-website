@@ -1,4 +1,4 @@
-import { LINKS, SITE } from "../../lib/site-data";
+import { LINKS, SITE, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
 import { IconFacebook, IconInstagram, IconPhone, IconWhatsApp } from "../Icons";
 
 export default function Footer() {
@@ -49,10 +49,50 @@ export default function Footer() {
           <div>
             <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#d4af37] uppercase mb-8">Services</h4>
             <ul className="space-y-4 text-sm font-medium text-[#a9b0b8]">
-              <li><a href="#services" className="hover:text-white transition-colors cursor-pointer">UAE Tourist Visa</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors cursor-pointer">Kuwait Visa Stamping</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors cursor-pointer">Umrah Packages</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors cursor-pointer">Flight Booking</a></li>
+              <li>
+                <a 
+                  href={getWhatsAppUrl(serviceMessages.uaeVisa)} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  onClick={(e) => { e.preventDefault(); openWhatsApp(serviceMessages.uaeVisa); }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  UAE Tourist Visa
+                </a>
+              </li>
+              <li>
+                <a 
+                  href={getWhatsAppUrl(serviceMessages.kuwaitVisa)} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  onClick={(e) => { e.preventDefault(); openWhatsApp(serviceMessages.kuwaitVisa); }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Kuwait Visa Stamping
+                </a>
+              </li>
+              <li>
+                <a 
+                  href={getWhatsAppUrl(serviceMessages.umrah)} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  onClick={(e) => { e.preventDefault(); openWhatsApp(serviceMessages.umrah); }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Umrah Packages
+                </a>
+              </li>
+              <li>
+                <a 
+                  href={getWhatsAppUrl(serviceMessages.flightBooking)} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  onClick={(e) => { e.preventDefault(); openWhatsApp(serviceMessages.flightBooking); }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Flight Booking
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -68,7 +108,13 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href={LINKS.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
+                <a 
+                  href={getWhatsAppUrl(serviceMessages.general)} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  onClick={(e) => { e.preventDefault(); openWhatsApp(serviceMessages.general); }}
+                  className="flex items-center gap-4 group cursor-pointer"
+                >
                   <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-colors group-hover:bg-[#25D366]/20">
                     <IconWhatsApp className="w-3.5 h-3.5 text-white group-hover:text-[#25D366]" />
                   </div>

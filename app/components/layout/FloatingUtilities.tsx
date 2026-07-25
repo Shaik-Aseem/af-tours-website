@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IconWhatsApp, IconPhone } from "../Icons";
-import { LINKS } from "../../lib/site-data";
+import { LINKS, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
 
 export default function FloatingUtilities() {
   const [isVisible, setIsVisible] = useState(false);
@@ -67,10 +67,14 @@ export default function FloatingUtilities() {
 
             {/* WhatsApp Float */}
             <a
-              href={LINKS.whatsapp}
+              href={getWhatsAppUrl(serviceMessages.general)}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative group w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-lg shadow-[#25D366]/20 transition-all hover:scale-110 hover:shadow-[#25D366]/40"
+              onClick={(e) => {
+                e.preventDefault();
+                openWhatsApp(serviceMessages.general);
+              }}
+              className="relative group w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-lg shadow-[#25D366]/20 transition-all hover:scale-110 hover:shadow-[#25D366]/40 cursor-pointer"
               aria-label="Contact on WhatsApp"
             >
               <IconWhatsApp className="w-7 h-7" />
@@ -102,10 +106,14 @@ export default function FloatingUtilities() {
               Call
             </a>
             <a
-              href={LINKS.whatsapp}
+              href={getWhatsAppUrl(serviceMessages.general)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3 text-[11px] font-bold tracking-widest text-[#050505] uppercase shadow-[0_0_15px_rgba(37,211,102,0.3)]"
+              onClick={(e) => {
+                e.preventDefault();
+                openWhatsApp(serviceMessages.general);
+              }}
+              className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3 text-[11px] font-bold tracking-widest text-[#050505] uppercase shadow-[0_0_15px_rgba(37,211,102,0.3)] cursor-pointer"
             >
               <IconWhatsApp className="w-4 h-4" />
               WhatsApp

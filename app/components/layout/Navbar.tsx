@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import * as React from "react";
-import { LINKS, SITE } from "../../lib/site-data";
+import { LINKS, SITE, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
 import { IconPhone, IconWhatsApp } from "../Icons";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -124,10 +124,14 @@ export default function Navbar() {
             Call
           </a>
           <a
-            href={LINKS.whatsapp}
+            href={getWhatsAppUrl(serviceMessages.general)}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full bg-[#d4af37] px-6 py-3 text-[11px] font-bold tracking-[0.15em] text-[#050505] shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all duration-300 hover:bg-[#e6cc80] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] uppercase"
+            onClick={(e) => {
+              e.preventDefault();
+              openWhatsApp(serviceMessages.general);
+            }}
+            className="group inline-flex items-center gap-2 rounded-full bg-[#d4af37] px-6 py-3 text-[11px] font-bold tracking-[0.15em] text-[#050505] shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all duration-300 hover:bg-[#e6cc80] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] uppercase cursor-pointer"
           >
             <IconWhatsApp className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
             Enquire
@@ -198,11 +202,15 @@ export default function Navbar() {
               Call Now
             </a>
             <a
-              href={LINKS.whatsapp}
+              href={getWhatsAppUrl(serviceMessages.general)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 rounded-full bg-[#d4af37] px-6 py-4 text-xs font-bold tracking-[0.15em] text-[#050505] transition-all uppercase shadow-[0_0_20px_rgba(212,175,55,0.3)]"
-              onClick={() => setOpen(false)}
+              className="inline-flex items-center justify-center gap-3 rounded-full bg-[#d4af37] px-6 py-4 text-xs font-bold tracking-[0.15em] text-[#050505] transition-all uppercase shadow-[0_0_20px_rgba(212,175,55,0.3)] cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                setOpen(false);
+                openWhatsApp(serviceMessages.general);
+              }}
             >
               <IconWhatsApp className="h-4 w-4" />
               WhatsApp Enquiry
