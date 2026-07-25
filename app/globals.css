@@ -1,24 +1,30 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b1f3a;
-  --foreground: #eef4ff;
+  --background: #050505;
+  --foreground: #ffffff;
+  --card: #0F1115;
   --accent-gold: #d4af37;
-  --accent-gold-2: #b88b1f;
+  --text-secondary: #a9b0b8;
+  --border-color: rgba(255, 255, 255, 0.08);
   color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-accent: var(--accent-gold);
+  --color-muted: var(--text-secondary);
+  --color-border: var(--border-color);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0b1f3a;
-    --foreground: #eef4ff;
+    --background: #050505;
+    --foreground: #ffffff;
   }
 }
 
@@ -27,75 +33,50 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
     Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 ::selection {
   background: color-mix(in oklab, var(--accent-gold) 50%, transparent);
+  color: #fff;
 }
 
 @layer utilities {
   .container {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
   }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out both;
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
+  
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-md border border-white/[0.08] shadow-[0_8px_30px_rgb(0,0,0,0.12)];
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-[#d4af37] to-[#e6cc80] bg-clip-text text-transparent;
   }
 }
 
-.reveal-section {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-  will-change: opacity, transform;
+/* Hide scrollbar for clean look */
+::-webkit-scrollbar {
+  width: 8px;
 }
-
-.reveal-section--visible {
-  opacity: 1;
-  transform: translateY(0);
+::-webkit-scrollbar-track {
+  background: #050505;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-in-up,
-  .reveal-section,
-  .reveal-section--visible {
-    animation: none !important;
-    transition: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 4px;
 }
-
-.whatsapp-pulse {
-  animation: whatsapp-pulse 2.5s ease-out infinite;
-}
-
-@keyframes whatsapp-pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
-  }
-  60% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
 }

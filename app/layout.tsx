@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+import FloatingUtilities from "./components/layout/FloatingUtilities";
 import { Analytics } from "@vercel/analytics/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -64,7 +67,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-[#0b1f3a] text-white antialiased`}
       >
+        <Navbar />
         {children}
+        <Footer />
+        <FloatingUtilities />
         <Analytics />
       </body>
     </html>

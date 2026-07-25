@@ -15,5 +15,7 @@ export const LINKS = {
   callNow: `tel:${SITE.phoneE164}`,
   whatsapp: `https://wa.me/${SITE.whatsappNumber}?text=${WHATSAPP_TEXT}`,
   email: `mailto:${SITE.email}`,
+  instagram: "https://www.instagram.com/the_kadapa_aftravels?igsh=NGU2YmFzMXVkMzNz",
+  facebook: "https://www.facebook.com/share/185kPHDLfm/",
 } as const;
 
