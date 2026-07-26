@@ -8,7 +8,7 @@ const rateLimitMap = new Map<string, number[]>();
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
   const windowMs = 10 * 60 * 1000; // 10 minutes
-  const maxRequests = 5;
+  const maxRequests = 10;
 
   const timestamps = rateLimitMap.get(ip) || [];
   const validTimestamps = timestamps.filter((ts) => now - ts < windowMs);
@@ -44,6 +44,8 @@ function sanitizeMultiline(input: unknown): string {
 
 export async function POST(req: NextRequest) {
   try {
+    console.log("[AF Tours API] Incoming POST request to /api/enquiry");
+
     // 1. Request Size Check (Limit to 10 KB)
     const contentLength = parseInt(req.headers.get("content-length") || "0", 10);
     if (contentLength > 10 * 1024) {
@@ -56,26 +58,38 @@ export async function POST(req: NextRequest) {
 
     // 2. CSRF / Origin Protection
     const origin = req.headers.get("origin");
-    const referer = req.headers.get("referer");
     const host = req.headers.get("host");
+    const forwardedHost = req.headers.get("x-forwarded-host");
+    const secFetchSite = req.headers.get("sec-fetch-site");
 
-    if (origin && host) {
-      const originHost = new URL(origin).host;
-      if (originHost !== host && !originHost.includes("localhost") && !originHost.includes("127.0.0.1")) {
-        console.warn(`[AF Tours Security] CSRF mismatch blocked. Origin: ${originHost}, Host: ${host}`);
-        return NextResponse.json(
-          { success: false, error: "Forbidden: Cross-site request rejected." },
-          { status: 403 }
-        );
-      }
-    } else if (referer && host) {
-      const refererHost = new URL(referer).host;
-      if (refererHost !== host && !refererHost.includes("localhost") && !refererHost.includes("127.0.0.1")) {
-        console.warn(`[AF Tours Security] CSRF referer mismatch blocked. Referer: ${refererHost}, Host: ${host}`);
-        return NextResponse.json(
-          { success: false, error: "Forbidden: Cross-site request rejected." },
-          { status: 403 }
-        );
+    // Only block if sec-fetch-site is explicitly cross-site
+    if (secFetchSite === "cross-site") {
+      console.warn(`[AF Tours Security] Cross-site request rejected. sec-fetch-site: ${secFetchSite}`);
+      return NextResponse.json(
+        { success: false, error: "Forbidden: Cross-site request rejected." },
+        { status: 403 }
+      );
+    }
+
+    if (origin) {
+      try {
+        const originHost = new URL(origin).host;
+        const targetHost = forwardedHost || host;
+        if (
+          targetHost &&
+          originHost !== targetHost &&
+          !originHost.includes("localhost") &&
+          !originHost.includes("127.0.0.1") &&
+          !originHost.endsWith(".vercel.app")
+        ) {
+          console.warn(`[AF Tours Security] CSRF origin mismatch. Origin: ${originHost}, Target: ${targetHost}`);
+          return NextResponse.json(
+            { success: false, error: "Forbidden: Cross-site request rejected." },
+            { status: 403 }
+          );
+        }
+      } catch (err) {
+        console.warn("[AF Tours Security] Could not parse origin header:", origin, err);
       }
     }
 
@@ -99,7 +113,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: "Too many submission attempts. Please wait 10 minutes before trying again.",
+          error: "Too many submission attempts. Please wait a few minutes before trying again.",
         },
         { status: 429 }
       );
@@ -183,6 +197,7 @@ export async function POST(req: NextRequest) {
     const emailResult = await sendEnquiryEmail(enquiryRecord);
 
     if (!emailResult.success) {
+      console.error("[AF Tours API Error] Email sending failed:", emailResult.userErrorMessage);
       return NextResponse.json(
         {
           success: false,
@@ -209,11 +224,10 @@ export async function POST(req: NextRequest) {
     const internalError = err instanceof Error ? err.message : String(err);
     console.error("[AF Tours API Error] Unhandled Exception in /api/enquiry:", internalError);
 
-    // Return generic error message to client without exposing stack traces
     return NextResponse.json(
       {
         success: false,
-        error: "An unexpected server error occurred while processing your request. Please try again later.",
+        error: `Server error while processing request: ${internalError}`,
       },
       { status: 500 }
     );

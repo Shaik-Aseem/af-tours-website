@@ -10,16 +10,16 @@ export interface SendEmailResult {
 /**
  * Production-Ready Resend Email Dispatch Service for AF Tours & Travels.
  * Logs exact message IDs and internal errors server-side while exposing
- * only sanitized, generic messages to client callers.
+ * informative, actionable messages to client callers.
  */
 export async function sendEnquiryEmail(data: EnquiryEmailData): Promise<SendEmailResult> {
   const resendApiKey = process.env.RESEND_API_KEY;
 
-  if (!resendApiKey) {
-    console.error("[AF Tours Email Service Error] RESEND_API_KEY environment variable is not defined.");
+  if (!resendApiKey || resendApiKey.startsWith("re_your_actual")) {
+    console.error("[AF Tours Email Service Error] RESEND_API_KEY environment variable is not configured.");
     return {
       success: false,
-      userErrorMessage: "Email delivery service is currently unconfigured. Please contact support or try WhatsApp direct chat.",
+      userErrorMessage: "Email delivery service is currently unconfigured (RESEND_API_KEY environment variable is missing or placeholder). Please set your Resend API Key in Vercel Environment Variables.",
     };
   }
 
@@ -33,6 +33,8 @@ export async function sendEnquiryEmail(data: EnquiryEmailData): Promise<SendEmai
     const htmlContent = generateEnquiryEmailHtml(data);
     const textContent = generateEnquiryEmailText(data);
 
+    console.log(`[AF Tours Email Service] Sending enquiry email via Resend to ${toAddress} from ${fromAddress}...`);
+
     // Send email using Resend async pattern
     const { data: responseData, error: responseError } = await resend.emails.send({
       from: fromAddress,
@@ -45,12 +47,12 @@ export async function sendEnquiryEmail(data: EnquiryEmailData): Promise<SendEmai
 
     if (responseError) {
       console.error(
-        `[AF Tours Email Service Error] Resend API error sending email for customer "${data.name}":`,
+        `[AF Tours Email Service Error] Resend API rejected email for customer "${data.name}":`,
         responseError
       );
       return {
         success: false,
-        userErrorMessage: "Sorry, your enquiry email could not be delivered. Please try again or reach out on WhatsApp.",
+        userErrorMessage: `Email delivery failed (Resend API Error): ${responseError.message}`,
       };
     }
 
@@ -69,7 +71,7 @@ export async function sendEnquiryEmail(data: EnquiryEmailData): Promise<SendEmai
 
     return {
       success: false,
-      userErrorMessage: "An unexpected error occurred while sending your message. Please try again shortly.",
+      userErrorMessage: `Email service error: ${internalMessage}`,
     };
   }
 }
