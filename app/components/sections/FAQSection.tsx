@@ -30,15 +30,15 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="relative py-24 sm:py-32 bg-[#050505]">
+    <section className="relative py-24 sm:py-32 bg-[#0C1528]">
       <div className="container relative z-10 mx-auto px-4 max-w-4xl">
         <div className="text-center mb-16">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-[11px] font-semibold tracking-[0.2em] text-[#d4af37] uppercase mb-4"
+            transition={{ duration: 0.5 }}
+            className="text-[11px] font-semibold tracking-[0.2em] text-[#C9A227] uppercase mb-3"
           >
             Knowledge Base
           </motion.p>
@@ -46,8 +46,8 @@ export default function FAQSection() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl font-medium tracking-tight text-white sm:text-4xl md:text-5xl"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-3xl font-medium tracking-tight text-[#F7F7F5] sm:text-4xl md:text-5xl"
           >
             Frequently Asked Questions
           </motion.h2>
@@ -59,22 +59,24 @@ export default function FAQSection() {
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`overflow-hidden rounded-2xl border transition-colors duration-500 ${
-                  isOpen ? "border-[#d4af37]/30 bg-white/[0.03]" : "border-white/5 bg-[#0F1115]"
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+                  isOpen 
+                    ? "border-[#C9A227]/40 bg-[#1B2A49]" 
+                    : "border-[rgba(201,162,39,0.12)] bg-[#14213D] hover:border-[rgba(201,162,39,0.25)]"
                 }`}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="flex w-full items-center justify-between px-6 py-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37]/50 rounded-2xl"
+                  className="flex w-full items-center justify-between px-6 py-6 text-left focus:outline-none rounded-2xl"
                 >
-                  <span className={`text-base font-medium tracking-wide transition-colors duration-300 ${isOpen ? "text-[#d4af37]" : "text-white"}`}>
+                  <span className={`text-base font-medium tracking-wide transition-colors duration-200 ${isOpen ? "text-[#C9A227]" : "text-[#F7F7F5]"}`}>
                     {faq.question}
                   </span>
-                  <span className={`ml-6 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${isOpen ? "border-[#d4af37]/50 bg-[#d4af37]/10 text-[#d4af37] rotate-180" : "border-white/10 bg-white/5 text-white"}`}>
+                  <span className={`ml-6 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border transition-all duration-200 ${isOpen ? "border-[#C9A227] bg-[#C9A227]/15 text-[#C9A227] rotate-180" : "border-[rgba(201,162,39,0.2)] bg-[#0C1528] text-[#C9D2E3]"}`}>
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
@@ -86,9 +88,9 @@ export default function FAQSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
                     >
-                      <div className="px-6 pb-6 text-sm leading-relaxed text-[#a9b0b8]">
+                      <div className="px-6 pb-6 text-sm leading-relaxed text-[#C9D2E3] pt-1 border-t border-[rgba(201,162,39,0.08)]">
                         {faq.answer}
                       </div>
                     </motion.div>

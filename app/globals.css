@@ -1,20 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050505;
-  --foreground: #ffffff;
-  --card: #0F1115;
-  --accent-gold: #d4af37;
-  --text-secondary: #a9b0b8;
-  --border-color: rgba(255, 255, 255, 0.08);
+  --background: #0C1528;
+  --secondary-bg: #14213D;
+  --card: #1B2A49;
+  --accent-gold: #C9A227;
+  --hover-gold: #D8B84A;
+  --foreground: #F7F7F5;
+  --text-secondary: #C9D2E3;
+  --border-color: rgba(201, 162, 39, 0.12);
   color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-secondary: var(--secondary-bg);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-accent: var(--accent-gold);
+  --color-accent-hover: var(--hover-gold);
   --color-muted: var(--text-secondary);
   --color-border: var(--border-color);
   --font-sans: var(--font-geist-sans);
@@ -23,8 +27,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #050505;
-    --foreground: #ffffff;
+    --background: #0C1528;
+    --foreground: #F7F7F5;
   }
 }
 
@@ -32,7 +36,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
-    Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+    BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans", sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -40,43 +44,85 @@ body {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 6rem;
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--accent-gold) 50%, transparent);
-  color: #fff;
+  background: rgba(201, 162, 39, 0.25);
+  color: #F7F7F5;
 }
 
 @layer utilities {
   .container {
-    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
   
-  .glass-card {
-    @apply bg-card/60 backdrop-blur-md border border-white/[0.08] shadow-[0_8px_30px_rgb(0,0,0,0.12)];
+  .luxury-card {
+    background: #1B2A49;
+    border: 1px solid rgba(201, 162, 39, 0.12);
+    box-shadow: 0 10px 30px -10px rgba(12, 21, 40, 0.5);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  
-  .text-gradient {
-    @apply bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent;
+
+  .luxury-card:hover {
+    border-color: rgba(201, 162, 39, 0.25);
+    box-shadow: 0 20px 40px -15px rgba(12, 21, 40, 0.7);
   }
   
   .text-gradient-gold {
-    @apply bg-gradient-to-r from-[#d4af37] to-[#e6cc80] bg-clip-text text-transparent;
+    background: linear-gradient(135deg, #F7F7F5 0%, #C9A227 50%, #D8B84A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .btn-primary {
+    background: #C9A227;
+    color: #0C1528;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease-out;
+    box-shadow: 0 4px 20px rgba(201, 162, 39, 0.15);
+  }
+
+  .btn-primary:hover {
+    background: #D8B84A;
+    box-shadow: 0 6px 25px rgba(201, 162, 39, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: #1B2A49;
+    color: #F7F7F5;
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease-out;
+  }
+
+  .btn-secondary:hover {
+    border-color: #C9A227;
+    background: #22345a;
+    color: #F7F7F5;
+    transform: translateY(-1px);
   }
 }
 
-/* Hide scrollbar for clean look */
+/* Custom scrollbar matching luxury palette */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #0C1528;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1f2937;
+  background: #1B2A49;
+  border: 1px solid rgba(201, 162, 39, 0.15);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #374151;
+  background: #253961;
 }

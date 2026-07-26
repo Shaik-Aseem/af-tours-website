@@ -5,24 +5,24 @@ import { IconFacebook, IconInstagram, IconPhone, IconWhatsApp } from "../Icons";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#050505] border-t border-white/[0.04]">
+    <footer className="bg-[#0C1528] border-t border-[rgba(201,162,39,0.12)]">
       <div className="container mx-auto px-4 py-20">
         <div className="grid gap-12 lg:grid-cols-4 md:grid-cols-2">
           
           <div className="lg:col-span-1 pr-8">
-            <span className="inline-block text-xl font-bold tracking-[0.15em] text-white uppercase mb-6">
+            <span className="inline-block text-xl font-bold tracking-[0.15em] text-[#F7F7F5] uppercase mb-6">
               {SITE.name}
             </span>
-            <p className="text-sm text-[#a9b0b8] leading-relaxed mb-8">
+            <p className="text-sm text-[#C9D2E3] leading-relaxed mb-8">
               Your trusted partner for premium travel, visas, and Umrah packages in Kadapa. We handle the complexity so you can enjoy the journey.
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <a 
                 href={LINKS.facebook} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook Page" 
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#a9b0b8] transition-all hover:bg-[#1877F2]/20 hover:text-white hover:border-[#1877F2]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37]"
+                className="w-10 h-10 rounded-xl border border-[rgba(201,162,39,0.2)] bg-[#14213D] flex items-center justify-center text-[#C9D2E3] transition-all hover:bg-[#1877F2]/20 hover:text-[#F7F7F5] hover:border-[#1877F2]/50 focus:outline-none"
               >
                 <IconFacebook className="w-4 h-4" />
               </a>
@@ -31,7 +31,7 @@ export default function Footer() {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram Profile" 
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#a9b0b8] transition-all hover:bg-[#E1306C]/20 hover:text-white hover:border-[#E1306C]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37]"
+                className="w-10 h-10 rounded-xl border border-[rgba(201,162,39,0.2)] bg-[#14213D] flex items-center justify-center text-[#C9D2E3] transition-all hover:bg-[#E1306C]/20 hover:text-[#F7F7F5] hover:border-[#E1306C]/50 focus:outline-none"
               >
                 <IconInstagram className="w-4 h-4" />
               </a>
@@ -39,24 +39,24 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#d4af37] uppercase mb-8">Quick Links</h4>
-            <ul className="space-y-4 text-sm font-medium text-[#a9b0b8]">
-              <li><a href="#services" className="hover:text-white transition-colors">Premium Services</a></li>
-              <li><a href="#destinations" className="hover:text-white transition-colors">Destinations</a></li>
-              <li><a href="#founder" className="hover:text-white transition-colors">Our Story</a></li>
-              <li><a href="#contact" className="hover:text-white transition-colors">Contact Us</a></li>
+            <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#C9A227] uppercase mb-8">Quick Links</h4>
+            <ul className="space-y-4 text-sm font-medium text-[#C9D2E3]">
+              <li><a href="#services" className="hover:text-[#F7F7F5] transition-colors">Premium Services</a></li>
+              <li><a href="#destinations" className="hover:text-[#F7F7F5] transition-colors">Destinations</a></li>
+              <li><a href="#founder" className="hover:text-[#F7F7F5] transition-colors">Our Story</a></li>
+              <li><a href="#contact" className="hover:text-[#F7F7F5] transition-colors">Contact Us</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#d4af37] uppercase mb-8">Services</h4>
-            <ul className="space-y-4 text-sm font-medium text-[#a9b0b8]">
+            <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#C9A227] uppercase mb-8">Services</h4>
+            <ul className="space-y-4 text-sm font-medium text-[#C9D2E3]">
               <li>
                 <a 
                   href={getWhatsAppUrl(serviceMessages.uaeVisa)} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#F7F7F5] transition-colors cursor-pointer"
                 >
                   UAE Tourist Visa
                 </a>
@@ -66,7 +66,7 @@ export default function Footer() {
                   href={getWhatsAppUrl(serviceMessages.kuwaitVisa)} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#F7F7F5] transition-colors cursor-pointer"
                 >
                   Kuwait Visa Stamping
                 </a>
@@ -76,7 +76,7 @@ export default function Footer() {
                   href={getWhatsAppUrl(serviceMessages.umrah)} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#F7F7F5] transition-colors cursor-pointer"
                 >
                   Umrah Packages
                 </a>
@@ -86,7 +86,7 @@ export default function Footer() {
                   href={getWhatsAppUrl(serviceMessages.flightBooking)} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-[#F7F7F5] transition-colors cursor-pointer"
                 >
                   Flight Booking
                 </a>
@@ -95,14 +95,14 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#d4af37] uppercase mb-8">Connect</h4>
-            <ul className="space-y-5 text-sm font-medium text-[#a9b0b8]">
+            <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#C9A227] uppercase mb-8">Connect</h4>
+            <ul className="space-y-5 text-sm font-medium text-[#C9D2E3]">
               <li>
                 <a href="tel:+918328182055" className="flex items-center gap-4 group">
-                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-colors group-hover:bg-[#d4af37]/20">
-                    <IconPhone className="w-3.5 h-3.5 text-white group-hover:text-[#d4af37]" />
+                  <div className="w-8 h-8 rounded-xl bg-[#14213D] border border-[rgba(201,162,39,0.2)] flex items-center justify-center transition-colors group-hover:border-[#C9A227]">
+                    <IconPhone className="w-3.5 h-3.5 text-[#C9A227]" />
                   </div>
-                  <span className="group-hover:text-white transition-colors">+91 83281 82055</span>
+                  <span className="group-hover:text-[#F7F7F5] transition-colors">+91 83281 82055</span>
                 </a>
               </li>
               <li>
@@ -112,14 +112,14 @@ export default function Footer() {
                   rel="noopener noreferrer" 
                   className="flex items-center gap-4 group cursor-pointer"
                 >
-                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-colors group-hover:bg-[#25D366]/20">
-                    <IconWhatsApp className="w-3.5 h-3.5 text-white group-hover:text-[#25D366]" />
+                  <div className="w-8 h-8 rounded-xl bg-[#14213D] border border-[#25D366]/30 flex items-center justify-center transition-colors group-hover:bg-[#25D366]/20">
+                    <IconWhatsApp className="w-3.5 h-3.5 text-[#25D366]" />
                   </div>
-                  <span className="group-hover:text-white transition-colors">WhatsApp Enquiry</span>
+                  <span className="group-hover:text-[#F7F7F5] transition-colors">WhatsApp Enquiry</span>
                 </a>
               </li>
               <li className="pt-2">
-                <span className="block text-xs leading-relaxed max-w-[200px]">
+                <span className="block text-xs leading-relaxed max-w-[200px] text-[#C9D2E3]">
                   {SITE.address}
                 </span>
               </li>
@@ -128,11 +128,11 @@ export default function Footer() {
 
         </div>
 
-        <div className="mt-20 pt-8 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-6 text-[11px] font-medium tracking-wide text-[#a9b0b8] uppercase">
+        <div className="mt-20 pt-8 border-t border-[rgba(201,162,39,0.12)] flex flex-col md:flex-row items-center justify-between gap-6 text-[11px] font-medium tracking-wide text-[#C9D2E3] uppercase">
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
           <div className="flex items-center gap-8">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-[#F7F7F5] transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-[#F7F7F5] transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>
