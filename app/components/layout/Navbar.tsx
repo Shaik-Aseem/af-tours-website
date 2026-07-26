@@ -38,6 +38,18 @@ export default function Navbar() {
     ["1px solid rgba(201, 162, 39, 0)", "1px solid rgba(201, 162, 39, 0.12)"]
   );
 
+  // Manage body scroll locking when mobile menu drawer is active
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   useEffect(() => {
     const handleScroll = () => {
       const sections = NAV_ITEMS.map((item) => item.href.substring(1));
@@ -67,23 +79,29 @@ export default function Navbar() {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    
+    // 1. Immediately close mobile drawer & unlock body scroll
     setOpen(false);
+    document.body.style.overflow = "";
 
     const targetId = href.replace("#", "");
-    const element = document.getElementById(targetId);
 
-    if (element) {
-      const headerOffset = 84;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    // 2. Schedule smooth scroll after DOM state settles
+    setTimeout(() => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const headerOffset = 84;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
 
-      setActiveSection(href);
-    }
+        setActiveSection(href);
+      }
+    }, 60);
   };
 
   return (
@@ -194,7 +212,7 @@ export default function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="overflow-hidden bg-[#0C1528]/98 backdrop-blur-2xl border-b border-[rgba(201,162,39,0.15)] md:hidden shadow-2xl"
           >
             <div className="container py-6 px-6">
@@ -216,7 +234,10 @@ export default function Navbar() {
               <div className="mt-8 flex flex-col gap-3 pb-2">
                 <a
                   href="tel:+918328182055"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    document.body.style.overflow = "";
+                  }}
                   className="flex items-center justify-center gap-3 rounded-xl border border-[rgba(201,162,39,0.2)] bg-[#14213D] px-6 py-3.5 text-xs font-bold tracking-[0.15em] text-[#F7F7F5] transition-all uppercase hover:bg-[#1B2A49]"
                 >
                   <IconPhone className="h-4 w-4 text-[#C9A227]" />
@@ -226,7 +247,10 @@ export default function Navbar() {
                   href="https://wa.me/918328182055"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    document.body.style.overflow = "";
+                  }}
                   className="flex items-center justify-center gap-3 rounded-xl bg-[#C9A227] px-6 py-3.5 text-xs font-bold tracking-[0.15em] text-[#0C1528] transition-all uppercase shadow-[0_4px_20px_rgba(201,162,39,0.2)] cursor-pointer hover:bg-[#D8B84A]"
                 >
                   <IconWhatsApp className="h-4 w-4 text-[#0C1528]" />
