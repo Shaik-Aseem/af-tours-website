@@ -1,6 +1,6 @@
 "use client";
 
-import { LINKS, SITE, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
+import { LINKS, SITE, serviceMessages, getWhatsAppUrl } from "../../lib/site-data";
 import { IconFacebook, IconInstagram, IconPhone, IconWhatsApp } from "../Icons";
 
 export default function Footer() {
@@ -56,7 +56,6 @@ export default function Footer() {
                   href={getWhatsAppUrl(serviceMessages.uaeVisa)} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  onClick={(e) => { e.preventDefault(); openWhatsApp(serviceMessages.uaeVisa); }}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
                   UAE Tourist Visa
@@ -67,7 +66,6 @@ export default function Footer() {
                   href={getWhatsAppUrl(serviceMessages.kuwaitVisa)} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  onClick={(e) => { e.preventDefault(); openWhatsApp(serviceMessages.kuwaitVisa); }}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
                   Kuwait Visa Stamping
@@ -78,7 +76,6 @@ export default function Footer() {
                   href={getWhatsAppUrl(serviceMessages.umrah)} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  onClick={(e) => { e.preventDefault(); openWhatsApp(serviceMessages.umrah); }}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
                   Umrah Packages
@@ -89,7 +86,6 @@ export default function Footer() {
                   href={getWhatsAppUrl(serviceMessages.flightBooking)} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  onClick={(e) => { e.preventDefault(); openWhatsApp(serviceMessages.flightBooking); }}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
                   Flight Booking
@@ -102,19 +98,18 @@ export default function Footer() {
             <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#d4af37] uppercase mb-8">Connect</h4>
             <ul className="space-y-5 text-sm font-medium text-[#a9b0b8]">
               <li>
-                <a href={LINKS.callNow} className="flex items-center gap-4 group">
+                <a href="tel:+918328182055" className="flex items-center gap-4 group">
                   <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-colors group-hover:bg-[#d4af37]/20">
                     <IconPhone className="w-3.5 h-3.5 text-white group-hover:text-[#d4af37]" />
                   </div>
-                  <span className="group-hover:text-white transition-colors">{SITE.phoneDisplay}</span>
+                  <span className="group-hover:text-white transition-colors">+91 83281 82055</span>
                 </a>
               </li>
               <li>
                 <a 
-                  href={getWhatsAppUrl(serviceMessages.general)} 
+                  href="https://wa.me/918328182055"
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  onClick={(e) => { e.preventDefault(); openWhatsApp(serviceMessages.general); }}
                   className="flex items-center gap-4 group cursor-pointer"
                 >
                   <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-colors group-hover:bg-[#25D366]/20">

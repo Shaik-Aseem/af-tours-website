@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IconWhatsApp, IconPhone } from "../Icons";
-import { LINKS, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
 
 export default function FloatingUtilities() {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,12 +10,10 @@ export default function FloatingUtilities() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Calculate scroll progress for the top bar
       const totalScroll = document.documentElement.scrollTop;
       const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       setScrollProgress((totalScroll / windowHeight) * 100);
 
-      // Show floating buttons after scrolling down 300px
       if (totalScroll > 300) {
         setIsVisible(true);
       } else {
@@ -52,7 +49,7 @@ export default function FloatingUtilities() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-4 hidden md:flex"
+            className="fixed bottom-6 right-6 z-50 flex-col items-center gap-4 hidden md:flex"
           >
             {/* Scroll to Top */}
             <button
@@ -67,19 +64,14 @@ export default function FloatingUtilities() {
 
             {/* WhatsApp Float */}
             <a
-              href={getWhatsAppUrl(serviceMessages.general)}
+              href="https://wa.me/918328182055"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => {
-                e.preventDefault();
-                openWhatsApp(serviceMessages.general);
-              }}
               className="relative group w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-lg shadow-[#25D366]/20 transition-all hover:scale-110 hover:shadow-[#25D366]/40 cursor-pointer"
               aria-label="Contact on WhatsApp"
             >
               <IconWhatsApp className="w-7 h-7" />
               
-              {/* Tooltip */}
               <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-[#0F1115] border border-white/10 text-[10px] font-bold tracking-widest text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity uppercase pointer-events-none">
                 Chat with us
                 <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-[#0F1115] border-t border-r border-white/10 rotate-45" />
@@ -96,24 +88,20 @@ export default function FloatingUtilities() {
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             exit={{ y: 100 }}
-            className="fixed bottom-0 left-0 w-full z-50 md:hidden bg-[#0F1115]/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 flex gap-3"
+            className="fixed bottom-0 left-0 w-full z-50 md:hidden bg-[#0F1115]/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 flex gap-3 shadow-2xl"
           >
             <a
-              href={LINKS.callNow}
-              className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 py-3 text-[11px] font-bold tracking-widest text-white uppercase"
+              href="tel:+918328182055"
+              className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 py-3 text-[11px] font-bold tracking-widest text-white uppercase active:bg-white/10"
             >
               <IconPhone className="w-4 h-4 text-[#d4af37]" />
               Call
             </a>
             <a
-              href={getWhatsAppUrl(serviceMessages.general)}
+              href="https://wa.me/918328182055"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => {
-                e.preventDefault();
-                openWhatsApp(serviceMessages.general);
-              }}
-              className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3 text-[11px] font-bold tracking-widest text-[#050505] uppercase shadow-[0_0_15px_rgba(37,211,102,0.3)] cursor-pointer"
+              className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3 text-[11px] font-bold tracking-widest text-[#050505] uppercase shadow-[0_0_15px_rgba(37,211,102,0.3)] active:bg-[#20bd5a] cursor-pointer"
             >
               <IconWhatsApp className="w-4 h-4" />
               WhatsApp

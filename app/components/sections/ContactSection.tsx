@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { LINKS, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
+import { LINKS } from "../../lib/site-data";
 import { IconFacebook, IconInstagram, IconMapPin, IconPhone, IconWhatsApp } from "../Icons";
 
 export default function ContactSection() {
@@ -37,13 +37,9 @@ export default function ContactSection() {
             {/* Quick Contact Buttons */}
             <div className="flex flex-col gap-4">
               <a
-                href={getWhatsAppUrl(serviceMessages.general)}
+                href="https://wa.me/918328182055"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  openWhatsApp(serviceMessages.general);
-                }}
                 className="group flex items-center gap-4 p-5 rounded-2xl glass-card transition-all duration-500 hover:-translate-y-1 hover:bg-white/[0.03] hover:border-[#25D366]/30 hover:shadow-[0_15px_30px_rgba(37,211,102,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] cursor-pointer"
                 aria-label="Direct WhatsApp Enquiry"
               >

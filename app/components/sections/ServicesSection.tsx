@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LINKS, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
+import { LINKS, serviceMessages, getWhatsAppUrl } from "../../lib/site-data";
 import { 
   IconArrowRight, 
   IconPlane, 
@@ -238,10 +238,6 @@ export default function ServicesSection() {
                     href={getWhatsAppUrl(service.message)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openWhatsApp(service.message);
-                    }}
                     className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-white transition-colors duration-300 hover:text-[#25D366] uppercase focus:outline-none cursor-pointer"
                   >
                     <span>Learn More</span>
@@ -337,10 +333,6 @@ export default function ServicesSection() {
                     href={getWhatsAppUrl(selectedService.message)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      openWhatsApp(selectedService.message);
-                    }}
                     className="flex-1 group relative flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-[#25D366] px-8 py-4 text-[11px] font-bold tracking-widest text-[#050505] shadow-[0_0_20px_rgba(37,211,102,0.2)] transition-all duration-300 hover:bg-[#34e678] hover:shadow-[0_0_30px_rgba(37,211,102,0.4)] uppercase cursor-pointer"
                   >
                     <IconWhatsApp className="w-4 h-4" />

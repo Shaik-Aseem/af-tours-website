@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import * as React from "react";
-import { LINKS, SITE, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
+import { SITE } from "../../lib/site-data";
 import { IconPhone, IconWhatsApp } from "../Icons";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
@@ -24,7 +24,7 @@ export default function Navbar() {
   const background = useTransform(
     scrollY,
     [0, 50],
-    ["rgba(5, 5, 5, 0)", "rgba(15, 17, 21, 0.9)"]
+    ["rgba(5, 5, 5, 0)", "rgba(15, 17, 21, 0.95)"]
   );
   
   const backdropBlur = useTransform(
@@ -48,8 +48,7 @@ export default function Navbar() {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          // If the top of the section is near the top of the viewport
-          if (rect.top <= 150 && rect.bottom >= 150) {
+          if (rect.top <= 180 && rect.bottom >= 180) {
             current = `#${section}`;
             break;
           }
@@ -62,22 +61,42 @@ export default function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    // Initial check
     handleScroll();
     
     return () => window.removeEventListener("scroll", handleScroll);
   }, [activeSection]);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setOpen(false);
+
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+
+      setActiveSection(href);
+    }
+  };
 
   return (
     <motion.header 
       style={{ background, backdropFilter: backdropBlur, borderBottom }}
       className="fixed top-0 z-50 w-full transition-all duration-300"
     >
-      <div className="container flex h-24 items-center justify-between transition-all duration-300">
+      <div className="container flex h-20 sm:h-24 items-center justify-between transition-all duration-300">
         <a
           href="#home"
           className="flex items-center gap-3 rounded-xl focus:outline-none group"
-          onClick={() => setOpen(false)}
+          onClick={(e) => handleNavClick(e, "#home")}
         >
           <span className="relative h-11 w-11 overflow-hidden rounded-lg bg-white/5 ring-1 ring-white/10 flex items-center justify-center backdrop-blur-sm transition-transform duration-500 group-hover:scale-105 group-hover:ring-white/20">
             <Image
@@ -94,11 +113,13 @@ export default function Navbar() {
           </span>
         </a>
 
+        {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.href}
               href={item.href}
+              onClick={(e) => handleNavClick(e, item.href)}
               className={`relative text-[11px] font-bold tracking-[0.15em] uppercase transition-colors duration-300 ${
                 activeSection === item.href ? "text-[#d4af37]" : "text-[#a9b0b8] hover:text-white"
               }`}
@@ -115,34 +136,32 @@ export default function Navbar() {
           ))}
         </nav>
 
+        {/* Desktop Direct Call & WhatsApp Buttons */}
         <div className="hidden items-center gap-4 md:flex">
           <a
-            href={LINKS.callNow}
+            href="tel:+918328182055"
             className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-[11px] font-bold tracking-[0.15em] text-white transition-all duration-300 hover:bg-white/10 hover:border-white/30 uppercase"
           >
             <IconPhone className="h-4 w-4 text-white transition-colors duration-300 group-hover:text-[#d4af37]" />
             Call
           </a>
           <a
-            href={getWhatsAppUrl(serviceMessages.general)}
+            href="https://wa.me/918328182055"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => {
-              e.preventDefault();
-              openWhatsApp(serviceMessages.general);
-            }}
-            className="group inline-flex items-center gap-2 rounded-full bg-[#d4af37] px-6 py-3 text-[11px] font-bold tracking-[0.15em] text-[#050505] shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all duration-300 hover:bg-[#e6cc80] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] uppercase cursor-pointer"
+            className="group inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-[11px] font-bold tracking-[0.15em] text-[#050505] shadow-[0_0_20px_rgba(37,211,102,0.3)] transition-all duration-300 hover:bg-[#20bd5a] hover:shadow-[0_0_30px_rgba(37,211,102,0.5)] uppercase cursor-pointer"
           >
             <IconWhatsApp className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
-            Enquire
+            WhatsApp
           </a>
         </div>
 
+        {/* Mobile Hamburger Menu Button */}
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 p-3 text-white transition-all duration-300 hover:bg-white/10 hover:border-white/30 md:hidden"
+          className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 p-3 text-white transition-all duration-300 hover:bg-white/10 hover:border-white/30 md:hidden focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
           aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => setOpen((prev) => !prev)}
         >
           <svg
             viewBox="0 0 24 24"
@@ -170,54 +189,55 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu Drawer */}
-      <motion.div 
-        initial={false}
-        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="overflow-hidden bg-[#0F1115]/95 backdrop-blur-2xl border-b border-white/10 md:hidden"
-      >
-        <div className="container py-8">
-          <nav className="flex flex-col gap-6">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className={`text-sm font-bold tracking-[0.2em] uppercase transition-colors ${
-                  activeSection === item.href ? "text-[#d4af37]" : "text-[#a9b0b8] hover:text-white"
-                }`}
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+      <AnimatePresence>
+        {open && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden bg-[#0F1115]/98 backdrop-blur-2xl border-b border-white/10 md:hidden shadow-2xl"
+          >
+            <div className="container py-6 px-6">
+              <nav className="flex flex-col gap-5">
+                {NAV_ITEMS.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className={`py-2 text-sm font-bold tracking-[0.2em] uppercase transition-colors border-b border-white/5 ${
+                      activeSection === item.href ? "text-[#d4af37]" : "text-[#a9b0b8] hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
 
-          <div className="mt-10 flex flex-col gap-4">
-            <a
-              href={LINKS.callNow}
-              className="inline-flex items-center justify-center gap-3 rounded-full border border-white/10 bg-white/5 px-6 py-4 text-xs font-bold tracking-[0.15em] text-white transition-all uppercase"
-              onClick={() => setOpen(false)}
-            >
-              <IconPhone className="h-4 w-4 text-[#d4af37]" />
-              Call Now
-            </a>
-            <a
-              href={getWhatsAppUrl(serviceMessages.general)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 rounded-full bg-[#d4af37] px-6 py-4 text-xs font-bold tracking-[0.15em] text-[#050505] transition-all uppercase shadow-[0_0_20px_rgba(212,175,55,0.3)] cursor-pointer"
-              onClick={(e) => {
-                e.preventDefault();
-                setOpen(false);
-                openWhatsApp(serviceMessages.general);
-              }}
-            >
-              <IconWhatsApp className="h-4 w-4" />
-              WhatsApp Enquiry
-            </a>
-          </div>
-        </div>
-      </motion.div>
+              <div className="mt-8 flex flex-col gap-3 pb-2">
+                <a
+                  href="tel:+918328182055"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/5 px-6 py-4 text-xs font-bold tracking-[0.15em] text-white transition-all uppercase hover:bg-white/10"
+                >
+                  <IconPhone className="h-4 w-4 text-[#d4af37]" />
+                  Call (+91 83281 82055)
+                </a>
+                <a
+                  href="https://wa.me/918328182055"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center gap-3 rounded-xl bg-[#25D366] px-6 py-4 text-xs font-bold tracking-[0.15em] text-[#050505] transition-all uppercase shadow-[0_0_20px_rgba(37,211,102,0.3)] cursor-pointer"
+                >
+                  <IconWhatsApp className="h-4 w-4" />
+                  WhatsApp Direct
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }

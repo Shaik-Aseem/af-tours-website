@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { LINKS, serviceMessages, getWhatsAppUrl, openWhatsApp } from "../../lib/site-data";
+import { LINKS, serviceMessages, getWhatsAppUrl } from "../../lib/site-data";
 import { IconFacebook, IconInstagram, IconPhone, IconWhatsApp } from "../Icons";
 
 export default function FounderSection() {
@@ -100,10 +100,6 @@ export default function FounderSection() {
                 href={getWhatsAppUrl(serviceMessages.general)}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  openWhatsApp(serviceMessages.general);
-                }}
                 className="group flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-3.5 text-sm font-semibold tracking-widest text-white backdrop-blur-md transition-all hover:bg-white/10 hover:border-white/40 hover:text-[#d4af37] uppercase sm:w-auto cursor-pointer"
               >
                 <IconWhatsApp className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
