@@ -6,7 +6,7 @@ import { IconWhatsApp } from "./Icons";
 export default function FloatingWhatsApp() {
   return (
     <a
-      href="https://wa.me/918328182055"
+      href={LINKS.whatsapp}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
@@ -16,4 +16,3 @@ export default function FloatingWhatsApp() {
     </a>
   );
 }
-
